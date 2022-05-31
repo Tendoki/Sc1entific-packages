@@ -1,0 +1,7 @@
+0042 cat male Pushok 13.09.2015 31.12.2016
+0043 dog female Dora 29.01.2015 31.12.2016
+0003 cat male Archi 03.03.2011 31.12.2016
+1003 elephant male Garchi 03.03.2011 31.12.2016
+0003 elephant male Sarchi 03.03.2011 31.12.2016
+0033 cat female Eula 02.03.2011 31.12.2016
+0103 elephant female Barchi 03.03.2011 31.12.2016
