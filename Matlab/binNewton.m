@@ -1,5 +1,4 @@
-% c
-task_2_newton();
+task_1();
 
 function [tt, to_break] = check_root(f, x, epsil)
     tt = f(x);
