@@ -1,7 +1,7 @@
 clear
 a = 0; b = 14;
 x = linspace(a,b,500)
-h = 0.001; iter=5; eps=0.001;
+h = 0.001; iter=100; eps=0.001;
 f=@(x)sin(x)./x;
 y=f(x);
 plot(x,f(x),x,0*x,':'); grid on
