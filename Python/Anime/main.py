@@ -145,10 +145,15 @@ for i in range(data.shape[0]):
 popular_genre_dict = dict()
 popular_theme_dict = dict()
 
+passing_genre_dict = dict()
+passing_theme_dict = dict()
+
 not_popular_genre_dict = dict()
 not_popular_theme_dict = dict()
 
 popular_anime = data.loc[data.rating >= 8].reset_index(drop=True)
+passing_anime = data.loc[data.rating < 8].reset_index(drop=True)
+passing_anime = passing_anime.loc[passing_anime.rating >= 7].reset_index(drop=True)
 not_popular_anime = data.loc[data.rating < 5].reset_index(drop=True)
 
 for i in range(popular_anime.shape[0]):
@@ -162,6 +167,18 @@ for i in range(popular_anime.shape[0]):
             popular_theme_dict[theme] = 1
         else:
             popular_theme_dict[theme] = popular_theme_dict[theme] + 1
+
+for i in range(passing_anime.shape[0]):
+    for genre in set(passing_anime.loc[i]['genre'].split(',')):
+        if genre not in passing_genre_dict:
+            passing_genre_dict[genre] = 1
+        else:
+            passing_genre_dict[genre] = passing_genre_dict[genre] + 1
+    for theme in set(passing_anime.loc[i]['theme'].split(',')):
+        if theme not in passing_theme_dict:
+            passing_theme_dict[theme] = 1
+        else:
+            passing_theme_dict[theme] = passing_theme_dict[theme] + 1
 
 for i in range(not_popular_anime.shape[0]):
     for genre in set(not_popular_anime.loc[i]['genre'].split(',')):
@@ -181,23 +198,27 @@ for theme in themes:
   colors[theme] = (random.random(), random.random(), random.random())
 #print(colors)
 
-fig10, (ax10, ax10_1) = plt.subplots(1, 2, figsize=(40,20))
+fig10, (ax10, ax10_1, ax10_2) = plt.subplots(1, 3, figsize=(40,20))
 fig10.suptitle('зависимость рейтинга от темы аниме', fontsize=30)
 ax10.pie(popular_theme_dict.values(), labels=popular_theme_dict.keys(),textprops={'fontsize': 5},autopct='%1.2f%%', colors=[colors[key] for key in popular_theme_dict.keys()])
 ax10.set_title("популярные", fontsize=20)
-ax10_1.pie(not_popular_theme_dict.values(), labels=not_popular_theme_dict.keys(),textprops={'fontsize': 5},autopct='%1.2f%%', colors=[colors[key] for key in not_popular_theme_dict.keys()])
-ax10_1.set_title("непопулярные", fontsize=20)
+ax10_1.pie(passing_theme_dict.values(), labels=passing_theme_dict.keys(),textprops={'fontsize': 5},autopct='%1.2f%%', colors=[colors[key] for key in passing_theme_dict.keys()])
+ax10_1.set_title("средние", fontsize=20)
+ax10_2.pie(not_popular_theme_dict.values(), labels=not_popular_theme_dict.keys(),textprops={'fontsize': 5},autopct='%1.2f%%', colors=[colors[key] for key in not_popular_theme_dict.keys()])
+ax10_2.set_title("непопулярные", fontsize=20)
 
 for genre in genres:
   colors[genre] = (random.random(), random.random(), random.random())
 print(colors)
 
-fig11, (ax11, ax11_1) = plt.subplots(1, 2, figsize=(40,20))
+fig11, (ax11, ax11_1, ax11_2) = plt.subplots(1, 3, figsize=(40,20))
 fig11.suptitle('зависимость рейтинга от темы аниме', fontsize=30)
 ax11.pie(popular_genre_dict.values(), labels=popular_genre_dict.keys(),textprops={'fontsize': 5},autopct='%1.2f%%', colors=[colors[key] for key in popular_genre_dict.keys()])
 ax11.set_title("популярные", fontsize=20)
-ax11_1.pie(not_popular_genre_dict.values(), labels=not_popular_genre_dict.keys(),textprops={'fontsize': 5},autopct='%1.2f%%', colors=[colors[key] for key in not_popular_genre_dict.keys()])
-ax11_1.set_title("непопулярные", fontsize=20)
+ax11_1.pie(passing_genre_dict.values(), labels=passing_genre_dict.keys(),textprops={'fontsize': 5},autopct='%1.2f%%', colors=[colors[key] for key in passing_genre_dict.keys()])
+ax11_1.set_title("средние", fontsize=20)
+ax11_2.pie(not_popular_genre_dict.values(), labels=not_popular_genre_dict.keys(),textprops={'fontsize': 5},autopct='%1.2f%%', colors=[colors[key] for key in not_popular_genre_dict.keys()])
+ax11_2.set_title("непопулярные", fontsize=20)
 
 #12
 voters_in_group = [0 for i in range(10)]
