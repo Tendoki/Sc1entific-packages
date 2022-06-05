@@ -210,19 +210,19 @@ fig12, ax12 = plt.subplots()
 ax12.bar([f"[{i}-{i+1})" for i in range(10)], voters_in_group)
 fig12.suptitle('зависимость рейтинга аниме от количество зрителей')
 
-voters_in_group1 = dict()
+rating_voters = dict()
 for i in range(data.shape[0]):
     anime_data = data.loc[i]
     if np.isnan(float(anime_data['rating'])) or np.isnan(int(anime_data['voters'])):
         continue
-    if round(anime_data['rating'], 1) not in voters_in_group1:
-        voters_in_group1[round(anime_data['rating'], 1)] = int(anime_data['voters'])
+    if round(anime_data['rating'], 1) not in rating_voters:
+        rating_voters[round(anime_data['rating'], 1)] = int(anime_data['voters'])
     else:
-        voters_in_group1[round(anime_data['rating'], 1)] = voters_in_group1[round(anime_data['rating'], 1)] + int(anime_data['voters'])
+        rating_voters[round(anime_data['rating'], 1)] = rating_voters[round(anime_data['rating'], 1)] + int(anime_data['voters'])
 
-voters_in_group1 = dict(sorted(voters_in_group1.items()))
+rating_voters = dict(sorted(rating_voters.items()))
 fig13, ax13 = plt.subplots()
-ax13.plot(list(voters_in_group1.keys()),list(voters_in_group1.values()))
+ax13.plot(list(rating_voters.keys()),list(rating_voters.values()))
 fig13.suptitle('линейный график зависимость рейтинга аниме от количество зрителей')
 
 plt.show()
