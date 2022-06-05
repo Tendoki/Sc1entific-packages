@@ -245,5 +245,4 @@ rating_voters = dict(sorted(rating_voters.items()))
 fig13, ax13 = plt.subplots()
 ax13.plot(list(rating_voters.keys()),list(rating_voters.values()))
 fig13.suptitle('линейный график зависимость рейтинга аниме от количество зрителей')
-
 plt.show()
