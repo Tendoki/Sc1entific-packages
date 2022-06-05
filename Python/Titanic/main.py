@@ -1,6 +1,10 @@
 import numpy as np
 import pandas as pd
 data = pd.read_csv('titanic.csv')
+pd.pivot_table(data[["Sex", "Survived"]],
+index = ["Sex"],
+columns = ["Survived"],
+aggfunc = len)
 print(data.isnull().sum())
 group = pd.DataFrame(data, columns=['SibSp', 'Parch'])
 data['Relatives'] = data[['SibSp','Parch']].sum(axis=1)
