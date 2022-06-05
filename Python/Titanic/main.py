@@ -23,3 +23,10 @@ data.loc[(data['Fare'] < 20), 'Fare_bin'] = 'Дешево'
 data.loc[(data['Fare'] >= 20), 'Fare_bin'] = 'Дорого'
 print(data['Fare_bin'])
 print(data['Fare_bin'].value_counts())
+data = data.assign(Expensive = list([0] * data.shape[0]))
+data.loc[(data.Fare >= 20), 'Expensive'] = 1
+pd.pivot_table(data[["Expensive", "Survived"]],
+index = ["Expensive"],
+columns = ["Survived"],
+aggfunc = len)
+print(data)
