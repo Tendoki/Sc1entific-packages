@@ -154,7 +154,7 @@ not_popular_theme_dict = dict()
 popular_anime = data.loc[data.rating >= 8].reset_index(drop=True)
 passing_anime = data.loc[data.rating < 8].reset_index(drop=True)
 passing_anime = passing_anime.loc[passing_anime.rating >= 7].reset_index(drop=True)
-not_popular_anime = data.loc[data.rating < 5].reset_index(drop=True)
+not_popular_anime = data.loc[data.rating < 7].reset_index(drop=True)
 
 for i in range(popular_anime.shape[0]):
     for genre in set(popular_anime.loc[i]['genre'].split(',')):
